@@ -5,6 +5,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "./config/db";
+import serviceRoutes from "./routes/service.route";
 import userRoutes from "./routes/user.route";
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/user", userRoutes)
+app.use("/api/service", serviceRoutes)
 
 
 // Login route
