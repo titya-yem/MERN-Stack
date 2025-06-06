@@ -5,6 +5,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "./config/db";
+import commentRoutes from "./routes/comment.route";
 import serviceRoutes from "./routes/service.route";
 import userRoutes from "./routes/user.route";
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/user", userRoutes)
 app.use("/api/service", serviceRoutes)
+app.use("/api/comment", commentRoutes)
 
 
 // Login route

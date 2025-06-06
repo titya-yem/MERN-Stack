@@ -11,14 +11,14 @@ enum petType {
 interface commentProps extends Document {
   title: string;
   text: string;
-  user: mongoose.Types.ObjectId;
+  userName: mongoose.Types.ObjectId;
   type: petType;
 }
 
 const commentSchema = new Schema<commentProps>({
   title: { type: String, trim: true, required: true },
   text: { type: String, trim: true, required: true },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  userName: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   type: { type: String, enum: Object.values(petType), required: true },
 }, { timestamps: true });
 
