@@ -5,6 +5,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "./config/db";
+import appointmentRoute from "./routes/appointment.route";
 import commentRoutes from "./routes/comment.route";
 import productRoute from "./routes/product.route";
 import serviceRoutes from "./routes/service.route";
@@ -29,6 +30,7 @@ app.use("/api/user", userRoutes)
 app.use("/api/service", serviceRoutes)
 app.use("/api/comment", commentRoutes)
 app.use("/api/product", productRoute)
+app.use("/api/appointment", appointmentRoute)
 
 // Login route
 

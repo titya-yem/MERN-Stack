@@ -23,7 +23,7 @@ const appointmentSchema = new mongoose.Schema<appointmentProps>({
     email: {type: String, required: true},
     time: {type: String, required: true},
     date: {type: String, required: true},
-    message: {type: String, required: true},
+    message: { type: String },
 }, { timestamps: true });
 
 const Appointment = mongoose.model<appointmentProps>("Appointment", appointmentSchema);

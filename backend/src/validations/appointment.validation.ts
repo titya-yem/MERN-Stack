@@ -8,7 +8,7 @@ const appointmentValidation = Joi.object({
     email: Joi.string().email().required(),
     time: Joi.string().required(),
     date: Joi.string().required(),
-    message: Joi.string().min(5).max(400).required(),
+    message: Joi.string().min(5).max(400).optional(),
 })
 
 export default appointmentValidation;
