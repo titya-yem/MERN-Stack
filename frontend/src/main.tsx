@@ -1,5 +1,6 @@
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
@@ -19,36 +20,34 @@ import ServicesPage from "./pages/ServicePage.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
 import { store } from "./store/store.ts";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-      <Provider store={store}>
-        <Theme appearance="inherit">
+    <Provider store={store}>
+      <Theme appearance="inherit">
+        <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Navbar />
             <Routes>
-              <Route path="/" element={<RootLayout />}> // RootLayout or HomePage
+              <Route path="/" element={<RootLayout />}>
                 <Route index element={<HomePage />} />
               </Route>
-              <Route path="/appointment" element={<AppointmentPage />} /> // AppointmentPage
+              <Route path="/appointment" element={<AppointmentPage />} />
               <Route path="/shop" element={<ShopLayout />}>
-                <Route index element={<ShopPage />} /> // ShopPage
-                <Route path=":slug" element={<ProductDetailPage />} /> // ProductDetailPage
+                <Route index element={<ShopPage />} />
+                <Route path=":slug" element={<ProductDetailPage />} />
               </Route>
-              <Route path="/services" element={<ServicesLayout />}> // ServicesLayout or ServicesPage
+              <Route path="/services" element={<ServicesLayout />}>
                 <Route index element={<ServicesPage />} />
               </Route>
-              <Route path="/contact" element={<ContactPage />} /> // ContactPage
-              <Route path="/cart" element={<Cart />} /> // Cart
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
             <Footer />
           </BrowserRouter>
-        </Theme>
-      </Provider>
+        </QueryClientProvider>
+      </Theme>
+    </Provider>
   </StrictMode>
 );
