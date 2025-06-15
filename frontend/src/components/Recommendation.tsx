@@ -10,11 +10,12 @@ import type { Comment } from "../types/commentTypes";
 import { Button } from "./ui/button";
 
 const Recommendation: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   
   const { isLoading, isError, data, error } = useQuery<Comment[]>({
     queryKey: ["comments"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/api/comment");
+      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/comment`);
       return res.data; 
     },
   });
@@ -22,8 +23,6 @@ const Recommendation: React.FC = () => {
   if (isLoading) return <h1>Loading...</h1>;
   if (isError) return <h1>Error: {(error as Error).message}</h1>;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>

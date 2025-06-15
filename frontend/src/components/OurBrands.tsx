@@ -7,7 +7,7 @@ import smartHeart from "@/assets/svg/products/smart-heart.svg";
 import whiskas from "@/assets/svg/products/Whiskas.svg";
 import { Box, Container, Flex } from "@radix-ui/themes";
 
-const OurBrands = () => {
+const OurBrands: React.FC = () => {
   return (
     <Box className="h-[650px] md:h-[400px] lg:h-[440px] bg-[#E3462C]">
       <Container>

@@ -1,10 +1,25 @@
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
-const LinkButton = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+interface LinkButtonProps {
+  link: string;
+  className?: string;
+  classname?: string;
+  name: string;
 }
 
-export default LinkButton
+const LinkButton = ({ link, className, name, classname }: LinkButtonProps) => {
+  return (
+    <div className={`${classname}`}>
+      <Link to={`/${link}`} className="w-full">
+        <Button
+          className={`bg-[#E3462C] py-6 px-10 font-semibold hover:bg-[#c52b1a] ${className}`}
+        >
+          {name}
+        </Button>
+      </Link>
+    </div>
+  );
+};
+
+export default LinkButton;

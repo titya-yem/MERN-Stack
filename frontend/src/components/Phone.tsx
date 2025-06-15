@@ -6,7 +6,7 @@ interface PhoneSVGProps {
   link?: string;
 }
 
-const Phone = ({ title, link }: PhoneSVGProps) => {
+const Phone: React.FC<PhoneSVGProps> = ({ title, link }) => {
   return (
     <Link
       to={`/${link}`}

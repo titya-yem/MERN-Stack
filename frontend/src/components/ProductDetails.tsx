@@ -11,6 +11,8 @@ import LinkButton from "./shared/LinkButton";
 import { Button } from "./ui/button";
 
 const ProductDetailPage = () => {
+  const [mainImage, setMainImage] = useState("");
+
   const { slug } = useParams(); 
   const dispatch = useDispatch();
 
@@ -19,13 +21,11 @@ const ProductDetailPage = () => {
   const { data: product, isLoading, isError, error } = useQuery<Product>({
     queryKey: ["product", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/products/${id}`);
       return res.data;
     },
     enabled: !!id, // Avoid running query if ID is undefined
   });
-
-  const [mainImage, setMainImage] = useState("");
 
   if (isLoading) return <div>Loading product...</div>;
   if (isError) return <div>Error: {error.message}</div>;

@@ -7,6 +7,7 @@ import morgan from "morgan";
 import connectDB from "./config/db";
 import appointmentRoute from "./routes/appointment.route";
 import commentRoutes from "./routes/comment.route";
+import contactRoute from "./routes/contact.route";
 import productRoute from "./routes/product.route";
 import serviceRoutes from "./routes/service.route";
 import userRoutes from "./routes/user.route";
@@ -31,6 +32,7 @@ app.use("/api/service", serviceRoutes)
 app.use("/api/comment", commentRoutes)
 app.use("/api/product", productRoute)
 app.use("/api/appointment", appointmentRoute)
+app.use("/api/contact", contactRoute)
 
 // Login route
 

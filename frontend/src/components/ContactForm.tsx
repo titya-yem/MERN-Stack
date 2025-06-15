@@ -1,3 +1,4 @@
+import type { ContactFormData } from "@/types/contactTypes";
 import { Box } from "@radix-ui/themes";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -5,12 +6,12 @@ import toast from "react-hot-toast";
 import { FaClock, FaEnvelope, FaPhoneAlt, FaUser } from "react-icons/fa";
 import { Button } from "./ui/button";
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<ContactFormData>();
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      await axios.post("http://localhost:5000/api/contact", data);
+      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/contact`, data);
       console.log({...data,});
       toast.success("Message sent", {
         position: "top-center",

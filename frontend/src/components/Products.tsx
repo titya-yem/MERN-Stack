@@ -12,25 +12,24 @@ import { Link } from "react-router";
 // Helper function to slugify product names
 const slugify = (name: string) => {
   return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "");
 };
 
 const ProductsComponent: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { isLoading, isError, data, error } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/api/product");
+      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/product`);
       return res.data; // return product array directly
     },
   });
 
   if (isLoading) return <h1>Loading...</h1>;
   if (isError) return <h1>Error: {(error as Error).message}</h1>;
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Container>
