@@ -9,7 +9,7 @@ const productValidation = Joi.object({
     rating: Joi.number().required(),
     reviews: Joi.number().positive(),
     description: Joi.string().min(5).max(450).required(),
-    image: Joi.string().required(),
+    image: Joi.string().pattern(/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/).required()
 })
 
 export default productValidation;
