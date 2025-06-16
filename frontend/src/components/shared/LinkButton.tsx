@@ -13,7 +13,7 @@ const LinkButton = ({ link, className, name, classname }: LinkButtonProps) => {
     <div className={`${classname}`}>
       <Link to={`/${link}`} className="w-full">
         <Button
-          className={`bg-[#E3462C] py-6 px-10 font-semibold hover:bg-[#c52b1a] ${className}`}
+          className={`bg-[#E3462C] py-6 px-10 font-semibold hover:bg-[#c52b1a] cursor-pointer ${className}`}
         >
           {name}
         </Button>

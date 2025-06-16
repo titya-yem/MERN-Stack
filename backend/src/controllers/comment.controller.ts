@@ -9,7 +9,7 @@ const petRequired = ["title", "text", "userName", "type"];
 // Get all comments
 export const getAllComments = async (req: Request, res: Response): Promise<void | any> => {
     try {
-        const comments = await Comment.find()
+        const comments = await Comment.find().populate("userName", "userName");
         if(!comments) {
             return res.status(404).json({ message: "No comments found" });
         }

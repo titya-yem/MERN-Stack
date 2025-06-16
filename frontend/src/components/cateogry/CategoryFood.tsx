@@ -6,6 +6,7 @@ import { Box, Flex } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router";
 import { Button } from "../ui/button";
 
 type categoryProps = {
@@ -34,13 +35,16 @@ const CategoryFood = ({ startIndex, itemsToShow }: categoryProps) => {
         <div key={item.id} className="w-[220px]">
           <div>
             {/* Image Box */}
-            <Box className="h-[140px] rounded-t-md flex items-center justify-center bg-white">
-              <img
-                src={item.image}
-                alt="Pet food product"
-                className="mx-auto max-w-full max-h-full object-contain"
-              />
-            </Box>
+            <Link to={`/product/${item.id}`}>
+              <Box className="h-[140px] rounded-t-md flex items-center justify-center bg-white">
+                <img
+                  src={item.image}
+                  alt="Pet food product"
+                  className="mx-auto max-w-full max-h-full object-contain"
+                />
+              </Box>
+            </Link>
+            
             {/* Info Box */}
             <Box className="rounded-b-md p-4 text-white bg-[#253239]">
               <h4 className="text-base font-medium mb-2">{item.name}</h4>
@@ -52,7 +56,7 @@ const CategoryFood = ({ startIndex, itemsToShow }: categoryProps) => {
                 </Flex>
               </Flex>
               <Button
-                className="!text-black bg-[#FAD046] hover:bg-[#ffca1e] w-full py-2"
+                className="w-full py-2 cursor-pointer !text-black bg-[#FAD046] hover:bg-[#ffca1e]"
                 onClick={() =>
                   dispatch(
                     addToCart({

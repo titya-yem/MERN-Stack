@@ -12,7 +12,9 @@ export interface Comment {
   _id: string;
   title: string;
   text: string;
-  userName: string;
+  userName: {
+    userName: string;
+  };
   type: petType;
   createdAt?: string;
   updatedAt?: string;

@@ -23,7 +23,7 @@ const TopCategories = () => {
   const { isLoading, isError, data, error } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/product`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/product`);
       return res.data;
     },
   })
@@ -87,7 +87,7 @@ const TopCategories = () => {
           <Button
             onClick={handleBackward}
             disabled={startIndex === 0} // Disable if at the start
-            className="border border-gray-300 shadow-md bg-transparent px-2 py-2 hover:bg-transparent rounded-sm"
+            className="border shadow-md bg-transparent px-2 py-2 cursor-pointer hover:bg-transparent rounded-sm border-gray-300"
           >
             <img
               src={leftArrow}
@@ -104,7 +104,7 @@ const TopCategories = () => {
           <Button
             onClick={handleForward}
             disabled={startIndex + itemsToShow >= data.length} // Disable if at the end
-            className="border border-gray-300 shadow-md bg-transparent px-2 py-2 hover:bg-transparent rounded-sm"
+            className="border shadow-md bg-transparent px-2 py-2 cursor-pointer hover:bg-transparent rounded-sm border-gray-300"
           >
             <img
               src={rightArrow}

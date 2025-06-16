@@ -10,11 +10,11 @@ const Services = () => {
   return (
     <Container className="mt-10 px-4">
       <div className="flex justify-between items-center mb-10">
-        <h1 className="text-2xl lg:text-4xl mx-auto md:my-4  font-bold uppercase">
+        <h1 className="text-2xl lg:text-4xl mx-auto md:my-4 font-bold uppercase">
           Services
         </h1>
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap gap-6 space-y-6 md:space-y-0">
+      <div className="flex flex-col md:flex-row flex-wrap gap-6 md:space-y-0">
         <ServicesCards image={circleDog} index={0} />
         <ServicesCards image={circleCat} index={1} />
         <ServicesCards image={circleRabbit} index={2} />

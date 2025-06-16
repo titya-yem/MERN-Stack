@@ -15,7 +15,7 @@ const ServicesCards: React.FC<ServicesCardsProps> = ({ image, index }) => {
   const { isLoading, isError, data, error } = useQuery<Service[]>({
     queryKey: ["services"],
     queryFn: async () => {
-      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/service`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/service`)
       return res.data;
     },
   });
@@ -33,19 +33,19 @@ const ServicesCards: React.FC<ServicesCardsProps> = ({ image, index }) => {
           <img
             src={image}
             alt={service.alt}
-            className="w-[260px] rounded-full p-2"
+            className="w-[260px] rounded-full p-2 object-contain"
           />
         </Box>
-        <Box className="space-y-3">
+        <Box className="space-y-2">
           <h1 className="text-xl md:text-2xl lg:text-3xl font-bold">
             {service.title}
           </h1>
           <Text as="p" className="text-sm lg:text-base text-[#e9e3d3] w-[90%]">
-            {service.text}
+            {service.description}
           </Text>
 
           {/* Buttons */}
-          <Flex gapX="4" className="md:pt-4">
+          <Flex gapX="4" className="pt-2 md:pt-4">
             <Link to="/appointment">
               <Button className="bg-[#FBF3DF] hover:bg-[#eae0c6] text-black">
                 <img src={dollarCircle} alt="Currency price USD" />
