@@ -2,11 +2,11 @@ import logo from "@/assets/image/Logo.png";
 import ShoppingBag from "@/assets/svg/ShoppingBag.svg";
 import toggle from "@/assets/svg/Toggle.svg";
 import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import type { RootState } from "@/store/store";
 import { Box, Container, Flex } from "@radix-ui/themes";

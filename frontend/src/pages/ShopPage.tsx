@@ -1,8 +1,6 @@
 import dogContact from "@/assets/image/shop-contact.png";
 import shopImage from "@/assets/image/shop-image.png";
 import catAppointment from "@/assets/image/shop-party.png";
-import OurBrands from "@/components/OurBrands";
-import ProductsComponent from "@/components/Products";
 import LinkButton from "@/components/shared/LinkButton";
 import { Box, Container, Text } from "@radix-ui/themes";
 
@@ -80,12 +78,7 @@ const ShopPage = () => {
             </div>
           </div>
         </div>
-
-        <Box>
-          <ProductsComponent />
-        </Box>
       </Container>
-      <OurBrands />
     </Box>
   );
 };

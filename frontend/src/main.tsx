@@ -5,20 +5,26 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./index.css";
+import { store } from "./store/store.ts";
+
 import Cart from "./components/Cart.tsx";
 import ProductDetailPage from "./components/ProductDetails.tsx";
 import Footer from "./components/shared/Footer.tsx";
 import Navbar from "./components/shared/Navbar.tsx";
-import "./index.css";
+
+// Layouts
 import RootLayout from "./layouts/RootLayout.tsx";
 import ServicesLayout from "./layouts/ServicesLayout.tsx";
 import ShopLayout from "./layouts/ShopLayout.tsx";
+import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
+
+// Pages
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ServicesPage from "./pages/ServicePage.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
-import { store } from "./store/store.ts";
 
 const queryClient = new QueryClient();
 
@@ -30,18 +36,31 @@ createRoot(document.getElementById("root")!).render(
           <BrowserRouter>
             <Navbar />
             <Routes>
+              {/* Home Page */}
               <Route path="/" element={<RootLayout />}>
                 <Route index element={<HomePage />} />
               </Route>
+
+              {/* Appointment Page */}
               <Route path="/appointment" element={<AppointmentPage />} />
+
+              {/* Shop Pages */}
               <Route path="/shop" element={<ShopLayout />}>
                 <Route index element={<ShopPage />} />
-                <Route path=":slug" element={<ProductDetailPage />} />
               </Route>
+              <Route path="/shop/:slug" element={<ShopDetailLayout />}>
+                <Route index element={<ProductDetailPage />} />
+              </Route>
+
+              {/* Services Page */}
               <Route path="/services" element={<ServicesLayout />}>
                 <Route index element={<ServicesPage />} />
               </Route>
+
+              {/* Contact Page */}
               <Route path="/contact" element={<ContactPage />} />
+
+              {/* Cart Page */}
               <Route path="/cart" element={<Cart />} />
             </Routes>
             <Footer />

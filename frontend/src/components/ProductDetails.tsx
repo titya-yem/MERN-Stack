@@ -21,7 +21,7 @@ const ProductDetailPage = () => {
   const { data: product, isLoading, isError, error } = useQuery<Product>({
     queryKey: ["product", id],
     queryFn: async () => {
-      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/products/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/product/${id}`);
       return res.data;
     },
     enabled: !!id, // Avoid running query if ID is undefined
@@ -37,7 +37,7 @@ const ProductDetailPage = () => {
   const handleAddToCart = () => {
     dispatch(
       addToCart({
-        id: product.id,
+        id: product._id,
         name: product.name,
         price: product.price,
         image: product.image,
@@ -48,7 +48,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <Box className="bg-[#FFFAF5]">
+    <Box className="h-[550px] bg-[#FFFAF5]">
       <Container className="p-8">
         <div className="flex items-start px-4">
           {/* Small Images Section */}

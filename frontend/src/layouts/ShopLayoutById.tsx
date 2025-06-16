@@ -1,15 +1,13 @@
 import OurBrands from "@/components/OurBrands";
-import ProductsComponent from "@/components/Products";
 import { Outlet } from "react-router-dom";
 
-const ShopLayout = () => {
+const ShopDetailLayout = () => {
   return (
     <>
       <Outlet />
-      <ProductsComponent />
       <OurBrands />
     </>
   );
 };
 
-export default ShopLayout;
+export default ShopDetailLayout;
