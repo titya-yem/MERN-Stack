@@ -8,3 +8,9 @@ export type Product = {
   category: string;
   description?: string;
 };
+
+export interface productProps {
+  startIndex: number;
+  itemsToShow: number;
+  products: Product[];
+}

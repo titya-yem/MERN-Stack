@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLists } from "../../constants/Navbar";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   

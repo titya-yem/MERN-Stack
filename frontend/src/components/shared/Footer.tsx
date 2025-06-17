@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
         </Box>
       </div>
       <img src={line} alt="footer-line" className="mt-8 mb-6" />
-      <Text as="p" className="text-sm text-center md:text-start md:pl-3">
+      <Text as="p" className="text-sm text-center md:text-start md:pl-3 text-amber-50">
         Copyright by Pet Shop. (Titya Yem)
       </Text>
     </Container>

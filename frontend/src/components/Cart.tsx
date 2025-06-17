@@ -66,7 +66,7 @@ const Cart = () => {
                 </div>
                 {/* Remove Button */}
                 <Button
-                  className="hidden md:block px-4 py-2 bg-red-500 text-white hover:bg-red-600"
+                  className="hidden md:block px-4 py-2 cursor-pointer bg-red-500 text-white hover:bg-red-600"
                   onClick={() => handleRemoveItem(item.id)} // Call the remove function
                 >
                   Remove
@@ -87,7 +87,7 @@ const Cart = () => {
         {/* Checkout Button */}
         <div className="mt-6 flex justify-end">
           <Button
-            className="px-8 py-5 bg-[#FF6135] text-white hover:bg-[#e55831]"
+            className="px-8 py-5 cursor-pointer bg-[#FF6135] text-white hover:bg-[#e55831]"
             disabled={cart.items.length === 0}
           >
             Checkout

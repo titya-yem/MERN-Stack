@@ -14,7 +14,7 @@ type categoryProps = {
   itemsToShow: number;
 };
 
-const CategoryFood = ({ startIndex, itemsToShow }: categoryProps) => {
+const CategoryFood: React.FC<categoryProps> = ({ startIndex, itemsToShow }: categoryProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { isLoading, isError, data, error } = useQuery<Product[]>({
@@ -32,10 +32,10 @@ const CategoryFood = ({ startIndex, itemsToShow }: categoryProps) => {
   return (
     <div className="flex justify-between items-center overflow-hidden gap-x-4 xl:gap-x-0 w-[85%]">
       {data.slice(startIndex, startIndex + itemsToShow).map((item) => (
-        <div key={item.id} className="w-[220px]">
+        <div key={item._id} className="w-[220px]">
           <div>
             {/* Image Box */}
-            <Link to={`/product/${item.id}`}>
+            <Link to={`/product/${item._id}`}>
               <Box className="h-[140px] rounded-t-md flex items-center justify-center bg-white">
                 <img
                   src={item.image}
@@ -60,12 +60,13 @@ const CategoryFood = ({ startIndex, itemsToShow }: categoryProps) => {
                 onClick={() =>
                   dispatch(
                     addToCart({
-                        id: item.id,
+                        id: item._id,
                         name: item.name,
                         price: item.price,
                         image: item.image,
                         quantity: 1,
                         category: item.category,
+                        description: item.description,
                     })
                   )
                 }

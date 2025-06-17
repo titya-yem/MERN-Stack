@@ -16,7 +16,7 @@ import { Button } from "../ui/button";
 import CategoryFood from "./CategoryFood";
 import PetFoodCategories from "./PetFoodCategory";
 
-const TopCategories = () => {
+const TopCategories: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);
 
