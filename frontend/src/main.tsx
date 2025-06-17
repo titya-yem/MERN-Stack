@@ -23,6 +23,7 @@ import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 import ServicesPage from "./pages/ServicePage.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
 
@@ -59,6 +60,9 @@ createRoot(document.getElementById("root")!).render(
 
               {/* Contact Page */}
               <Route path="/contact" element={<ContactPage />} />
+
+              {/* Contact Page */}
+              <Route path="/login" element={<LoginPage />} />
 
               {/* Cart Page */}
               <Route path="/cart" element={<Cart />} />

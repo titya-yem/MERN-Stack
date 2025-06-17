@@ -1,11 +1,17 @@
+// Middlewares
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+
+// Database
 import connectDB from "./config/db";
+
+// Routes
 import appointmentRoute from "./routes/appointment.route";
+import authRoutes from "./routes/auth.route";
 import commentRoutes from "./routes/comment.route";
 import contactRoute from "./routes/contact.route";
 import productRoute from "./routes/product.route";
@@ -28,6 +34,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/user", userRoutes)
+app.use("/api/auth", authRoutes)
 app.use("/api/service", serviceRoutes)
 app.use("/api/comment", commentRoutes)
 app.use("/api/product", productRoute)

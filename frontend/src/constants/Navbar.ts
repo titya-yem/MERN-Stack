@@ -25,6 +25,10 @@ export const NavbarLists: NavbarList[] = [
     link: "/contact",
   },
   {
+    label: "Login",
+    link: "/login",
+  },
+  {
     label: "Cart",
     link: "/cart",
   },

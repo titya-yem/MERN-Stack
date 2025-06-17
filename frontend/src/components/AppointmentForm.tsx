@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@radix-ui/react-popover";
 import { Box } from "@radix-ui/themes";
 import axios from "axios";
@@ -21,7 +21,7 @@ const AppointmentForm = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     try {
-      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/appointment`, {...data, appointmentType, selectedDate,});
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/appointment/create`, {...data, appointmentType, selectedDate,});
       console.log({...data, appointmentType, selectedDate,});
       toast.success("Appointment booked successfully!", {
         position: "top-center",
@@ -52,7 +52,7 @@ const AppointmentForm = () => {
         {serviceCategories.map((type) => (
           <button
             key={type}
-            className={`px-4 py-2 border rounded-lg text-sm transition-all ${
+            className={`px-4 py-2 border rounded-lg text-sm transition-all cursor-pointer ${
               appointmentType === type
                 ? "bg-blue-500 text-white"
                 : "bg-gray-100"
@@ -132,7 +132,7 @@ const AppointmentForm = () => {
 
         <Button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg w-full"
+          className="p-3 rounded-lg w-full cursor-pointer bg-blue-500 hover:bg-blue-600 text-white"
         >
           Book appointment
         </Button>
