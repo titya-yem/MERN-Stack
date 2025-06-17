@@ -50,9 +50,9 @@ const ProductDetailPage = () => {
   return (
     <Box className="h-auto bg-[#FFFAF5]">
       <Container className="p-8">
-        <div className="flex items-start px-4 py-6 rounded-md shadow-lg bg-gray-400">
+        <div className="flex items-start px-4 py-6 rounded-md shadow-lg bg-white">
           {/* Small Images Section */}
-          <Box className="!hidden md:!block w-full md:w-[80px] space-y-2">
+          <Box className="!hidden md:!block w-full md:w-[200px] space-y-2">
             {[product.image].map((image, index) => (
               <img
                 key={index}
@@ -67,37 +67,38 @@ const ProductDetailPage = () => {
           </Box>
 
           {/* Main Image and Details */}
-          <div className="h-[500px] flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="h-auto md:h-[500px] flex flex-col md:flex-row justify-between items-center gap-4 lg:gap-20">
             <Box className="rounded-lg mx-auto md:w-[300px]">
               <img
                 src={mainImage}
                 alt={product.name}
-                className="w-full object-contain"
+                className="w-[180px] md:w-[200px] lg:w-[240px] mx-auto object-contain"
               />
             </Box>
 
-            <Box className="w-full mb-8 md:w-1/3">
-              <h1 className="text-2xl text-center md:text-start font-bold text-[#1F276C]">
+            {/* Product Details */}
+            <Box className="w-full md:w-2/3 lg:w-[45%] lg:mr-8">
+              <h1 className="text-2xl lg:text-4xl text-center md:text-start font-bold text-[#1F276C]">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-2">
-                <img src={star} alt="star" className="w-5 h-5" />
-                <Text as="p" className="text-gray-500">
+              <div className="flex items-center gap-2 pt-4">
+                <img src={star} alt="star" className="lg:w-5 lg:h-5" />
+                <Text as="p" className="text-sm lg:text-base text-gray-500">
                   {product.rating}{" "}
                   {product.reviews && `(${product.reviews} reviews)`}
                 </Text>
               </div>
-              <Text as="p" className="text-2xl pt-4 text-[#FF6135] font-semibold">
+              <Text as="p" className="text-2xl text-[#FF6135] font-semibold">
                 ${product.price.toFixed(2)}
               </Text>
               {product.description && (
-                <Text as="p" className="pt-4 mx-auto text-gray-700">
+                <Text as="p" className="pt-2 mx-auto text-center md:text-start text-sm lg:text-base text-gray-700">
                   {product.description}
                 </Text>
               )}
               <Button
                 onClick={handleAddToCart}
-                className="w-full py-6 mt-4 bg-[#FF6135] text-white hover:bg-[#e55831]"
+                className="w-full py-6 mt-6 cursor-pointer bg-[#FF6135] text-white hover:bg-[#e55831]"
               >
                 Add to Cart
               </Button>

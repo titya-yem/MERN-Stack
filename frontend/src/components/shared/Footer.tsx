@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center justify-center gap-x-4">
               <img src={emailIcon} alt="Contact us via our Email" />
               <Text as="p">
-                <a href="mailto:thitya.yem.photo@gmail.com">
+                <a href="mailto:thitya.yem.photo@gmail.com" className="underline">
                   thitya.yem.photo@gmail.com
                 </a>
               </Text>

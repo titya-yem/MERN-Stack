@@ -13,7 +13,7 @@ const OurBrands: React.FC = () => {
       <Container>
         <Box>
           <h1 className="text-2xl lg:text-4xl mx-auto pt-10 md:my-4 lg:mb-14 text-center font-bold uppercase text-white">
-            What our clients say about us
+            Our cooporate brands
           </h1>
         </Box>
         <Box className="mt-10 md:mt-12">
