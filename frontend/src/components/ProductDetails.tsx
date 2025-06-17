@@ -48,9 +48,9 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <Box className="h-[550px] bg-[#FFFAF5]">
+    <Box className="h-auto bg-[#FFFAF5]">
       <Container className="p-8">
-        <div className="flex items-start px-4">
+        <div className="flex items-start px-4 py-6 rounded-md shadow-lg bg-gray-400">
           {/* Small Images Section */}
           <Box className="!hidden md:!block w-full md:w-[80px] space-y-2">
             {[product.image].map((image, index) => (
@@ -67,16 +67,16 @@ const ProductDetailPage = () => {
           </Box>
 
           {/* Main Image and Details */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Box className="p-10 rounded-lg mx-auto md:w-[300px] bg-white">
+          <div className="h-[500px] flex flex-col md:flex-row justify-between items-center gap-4">
+            <Box className="rounded-lg mx-auto md:w-[300px]">
               <img
                 src={mainImage}
                 alt={product.name}
-                className="w-full h-auto max-h-[500px] object-contain"
+                className="w-full object-contain"
               />
             </Box>
 
-            <Box className="w-full md:w-1/3 space-y-4">
+            <Box className="w-full mb-8 md:w-1/3">
               <h1 className="text-2xl text-center md:text-start font-bold text-[#1F276C]">
                 {product.name}
               </h1>
@@ -87,21 +87,21 @@ const ProductDetailPage = () => {
                   {product.reviews && `(${product.reviews} reviews)`}
                 </Text>
               </div>
-              <Text as="p" className="text-2xl text-[#FF6135] font-semibold">
+              <Text as="p" className="text-2xl pt-4 text-[#FF6135] font-semibold">
                 ${product.price.toFixed(2)}
               </Text>
               {product.description && (
-                <Text as="p" className="mx-auto text-gray-700">
+                <Text as="p" className="pt-4 mx-auto text-gray-700">
                   {product.description}
                 </Text>
               )}
               <Button
                 onClick={handleAddToCart}
-                className="w-full py-6 bg-[#FF6135] text-white hover:bg-[#e55831]"
+                className="w-full py-6 mt-4 bg-[#FF6135] text-white hover:bg-[#e55831]"
               >
                 Add to Cart
               </Button>
-              <LinkButton name="Back To Shop" link="shop" className="w-full" />
+              <LinkButton name="Back To Shop" link="shop" className="mt-4 w-full" />
             </Box>
           </div>
         </div>

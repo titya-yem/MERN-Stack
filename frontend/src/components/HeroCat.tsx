@@ -30,7 +30,7 @@ const HeroCat: React.FC = () => {
             <p className="text-sm lg:text-base">Nutritional product</p>
           </Box>
           <Box>
-            <h2 className="text-2xl lg:text-3xl font-semibold">$4</h2>
+            <h2 className="text-2xl lg:text-3xl font-semibold">#4</h2>
             <p className="text-sm lg:text-base">Product Sale</p>
           </Box>
           <Box>

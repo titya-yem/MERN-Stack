@@ -14,6 +14,13 @@ type categoryProps = {
   itemsToShow: number;
 };
 
+const slugify = (name: string) => {
+  return name
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "");
+};
+
 const CategoryFood: React.FC<categoryProps> = ({ startIndex, itemsToShow }: categoryProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -35,7 +42,7 @@ const CategoryFood: React.FC<categoryProps> = ({ startIndex, itemsToShow }: cate
         <div key={item._id} className="w-[220px]">
           <div>
             {/* Image Box */}
-            <Link to={`/product/${item._id}`}>
+            <Link to={`/shop/${slugify(item.name)}-${item._id}`}>
               <Box className="h-[140px] rounded-t-md flex items-center justify-center bg-white">
                 <img
                   src={item.image}
