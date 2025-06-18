@@ -23,9 +23,9 @@ import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
 import ServicesPage from "./pages/ServicePage.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
+import SignUpPage from "./pages/SignUpPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -62,7 +62,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/contact" element={<ContactPage />} />
 
               {/* Contact Page */}
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
 
               {/* Cart Page */}
               <Route path="/cart" element={<Cart />} />

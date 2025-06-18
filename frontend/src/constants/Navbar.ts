@@ -25,8 +25,8 @@ export const NavbarLists: NavbarList[] = [
     link: "/contact",
   },
   {
-    label: "Login",
-    link: "/login",
+    label: "Sign Up",
+    link: "/signup",
   },
   {
     label: "Cart",
