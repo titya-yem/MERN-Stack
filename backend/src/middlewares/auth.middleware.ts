@@ -2,36 +2,39 @@ import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
-dotenv.config();
+dotenv.config()
 
-const auth = (req: Request, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader || !authHeader.startsWith('Bearer')) {
-    res.status(401).json({ message: 'Access denied. Unauthorized' });
-    return;
+interface AuthRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+    role: string;
   }
+}
 
-  const token = authHeader.split(' ')[1];
-  if (!token) {
-    res.status(401).json({ message: 'Access denied. Unauthorized' });
-    return;
+const auth = (req: AuthRequest, res: Response, next: NextFunction): Response | void => {
+  const { token } = req.cookies
+
+  if(!token) {
+    return res.status(401).json({success: false, message: "Access denied. Unauthorized"})
   }
 
   try {
-    const decoded = verify(token, process.env.JWT_SECRET as string);
+    const decoded = verify(token, process.env.JWT_SECRET as string)
 
-    if (typeof decoded === 'object' && decoded !== null) {
-      req.user = decoded as { id: string; email: string; role: string };
-    } else {
-      throw new Error('Invalid token payload');
+    if(typeof decoded === "object" && decoded !== null && "id" in decoded && "email" in decoded && "role" in decoded) {
+      req.user = {
+        id: (decoded as any).id,
+        email: (decoded as any).email,
+        role: (decoded as any).role
+      }
     }
-
-    next();
+    
+    next()
   } catch (error) {
-    console.error('JWT Error:', error instanceof Error ? error.message : 'Unknown error');
-    res.status(400).json({ message: 'Invalid token' });
+    console.error("JWT verification error:", error instanceof Error ? error.message: error)
+    return res.status(401).json({success: false, message: "Invalid token"})
   }
-};
+}
 
-export default auth;
+export default auth

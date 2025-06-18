@@ -1,8 +1,12 @@
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import User from '../models/user.model';
 import userValidation from '../validations/user.validation';
+
+dotenv.config();
 
 // Create a new user
 export const createUser = async (req: Request, res: Response): Promise<void | any> => {
@@ -23,9 +27,21 @@ export const createUser = async (req: Request, res: Response): Promise<void | an
         const newUser = new User({ ...value, password: hashedPassword });
 
         await newUser.save();
+
+        const token = jwt.sign({ id: newUser._id, email: newUser.email, role: newUser.role },
+          process.env.JWT_SECRET as string, { expiresIn: '7h' });
+
         const userResponse = _.omit(newUser.toObject(), ["password", "__v", "role"]);
 
-        res.status(201).json(userResponse);
+        res.cookie("token", token, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "strict",
+              maxAge: 7 * 60 * 60 * 1000, // 7 hours
+            }).status(201).json({
+                message: "User created and logged in successfully",
+                user: userResponse,
+            });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to create user' });

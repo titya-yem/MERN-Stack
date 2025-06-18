@@ -7,13 +7,13 @@ const SignUpPage = () => {
   return (
       <Box>
         <Toaster />
-      <div className="flex justify-center items-center py-8 bg-[#1F272B]">
+      <div className="flex justify-center items-center py-8 bg-[#FFEFF4]">
         {/* Image */}
         <Box>
           <img
             src={SignupBackground}
             alt="cute cat and dog sitting on a chair"
-            className="hidden lg:block w-[458px]"
+            className="hidden shadow-lg rounded-l-lg lg:block w-[458px]"
           />
         </Box>
 

@@ -1,6 +1,7 @@
 interface NavbarList {
   label: string;
   link: string;
+  description?: string;
 }
 
 export const NavbarLists: NavbarList[] = [
@@ -19,14 +20,17 @@ export const NavbarLists: NavbarList[] = [
   {
     label: "Appointment",
     link: "/appointment",
+    description: "Book an appointment with our team",
   },
   {
     label: "Contact",
     link: "/contact",
+    description: "Get in touch with us",
   },
   {
     label: "Sign Up",
     link: "/signup",
+    description: "Create an account",
   },
   {
     label: "Cart",

@@ -11,7 +11,7 @@ const SignUpForm = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = async (data: any) => {
         try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/api/user/create`, data);
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/user/signup`, data);
         console.log({data});
         toast.success("Account created successfully!", {
             position: "top-center",
@@ -27,10 +27,10 @@ const SignUpForm = () => {
 
   return (
     <div className="w-[340px] md:w-[450px] h-[565px] py-6 shadow-lg rounded-lg lg:rounded-l-none max-w-md bg-white">
-      <h2 className="text-2xl font-bold text-center">
+      <h2 className="text-2xl font-bold text-center text-[#2F398B]">
         Welcome to Pet Shop
       </h2>
-      <Text as="p" className="text-sm pt-2 pb-4 text-center text-[#A8A5A6]">
+      <Text as="p" className="text-sm pt-2 pb-4 text-center font-medium text-[#029FE3]">
         For better Experience with your pets!
       </Text>
 
