@@ -20,13 +20,16 @@ import ShopLayout from "./layouts/ShopLayout.tsx";
 import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
 
 // Pages
+import axios from "axios";
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ServicesPage from "./pages/ServicePage.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
+import SignInPage from "./pages/SignInPage.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
 
+axios.defaults.withCredentials = true;
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -61,7 +64,10 @@ createRoot(document.getElementById("root")!).render(
               {/* Contact Page */}
               <Route path="/contact" element={<ContactPage />} />
 
-              {/* Contact Page */}
+              {/* SignIn Page */}
+              <Route path="/signin" element={<SignInPage />} />
+
+              {/* SignUp Page */}
               <Route path="/signup" element={<SignUpPage />} />
 
               {/* Cart Page */}

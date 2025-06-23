@@ -16,22 +16,31 @@ import { FaCalendarAlt, FaEnvelope, FaUser } from "react-icons/fa";
 const AppointmentForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [appointmentType, setAppointmentType] = useState("General Checkup");
+  const [appointmentType, setAppointmentType] = useState("Vacation");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
-    try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/appointment/create`, {...data, appointmentType, selectedDate,});
-      console.log({...data, appointmentType, selectedDate,});
-      toast.success("Appointment booked successfully!", {
-        position: "top-center",
-      });
-      reset(); // reset form as new afte subbmited
-    } catch (error) {
-      console.log(error);
-      toast.error("Error to book an appointment please contact us");
-    }
-  };
+const onSubmit = async (data: any) => {
+  try {
+    const payload = {
+      name: data.name,
+      email: data.email,
+      time: data.time,
+      message: data.message || "",
+      type: appointmentType,
+      date: selectedDate?.toISOString(),
+    };
+
+    console.log("Payload:", payload);
+
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/appointment/create`, payload);
+    
+    toast.success("Appointment booked successfully!");
+    reset();
+  } catch (error) {
+    console.error("Error booking appointment:", error);
+    toast.error("Failed to book appointment.");
+  }
+};
 
   const serviceCategories: string[] = [
     "Vacation",

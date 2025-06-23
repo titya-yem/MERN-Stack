@@ -1,17 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 
 const admin = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        if(!req.user || req.user.role !== "admin") {
-            res.status(403).json({message: "Access denied. Admin only."})
-            return;
-        }
+  if (!req.user) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
 
-        next()
-    } catch (error) {
-        console.log(error)
-        res.status(500).send("Server error")
-    }
-}
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ success: false, message: "Forbidden: Admins only" });
+  }
+
+  next();
+};
 
 export default admin;

@@ -28,6 +28,11 @@ export const NavbarLists: NavbarList[] = [
     description: "Get in touch with us",
   },
   {
+    label: "Sign In",
+    link: "/signin",
+    description: "Sign in to your account",
+  },
+  {
     label: "Sign Up",
     link: "/signup",
     description: "Create an account",
