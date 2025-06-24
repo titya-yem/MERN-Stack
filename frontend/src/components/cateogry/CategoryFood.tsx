@@ -27,7 +27,7 @@ const CategoryFood: React.FC<categoryProps> = ({ startIndex, itemsToShow }: cate
   const { isLoading, isError, data, error } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/product`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/product`);
       return res.data;
     },
   })
