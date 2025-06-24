@@ -23,6 +23,11 @@ export const NavbarLists: NavbarList[] = [
     description: "Book an appointment with our team",
   },
   {
+    label: "Dashboard",
+    link: "/dashboard",
+    description: "Manage your website fully functional",
+  },
+  {
     label: "Contact",
     link: "/contact",
     description: "Get in touch with us",
