@@ -17,10 +17,17 @@ const SignInForm = () => {
   const onSubmit = async (data: any) => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signin`, data);
+      const { user, token } = res.data;
 
-      const { user } = res.data;
-      dispatch(setAuth(user));
-      
+      // Save for 7 hours
+      const expireTime = Date.now() + 7 * 60 * 60 * 1000;
+
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("expire", expireTime.toString());
+
+      dispatch(setAuth(user))
+
       toast.success("Sign in successful!", {
         position: "top-center",
       });
@@ -72,7 +79,6 @@ const SignInForm = () => {
             </Box>
           </Box>
 
-          {/* ✅ Fix: Change link to /signup instead of /restorePassword */}
           <Link
             to="/signup"
             className="text-sm font-medium hover:font-semibold underline text-blue-600"
