@@ -74,3 +74,37 @@ export const signOut = async (req: Request, res: Response): Promise<void | any> 
         })
     }
 }
+
+// Get current user
+export const getMe = async (req: Request, res: Response): Promise<void | any> => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ isAuthenticated: false });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+
+    // Type assertion or use JwtPayload interface
+    const { id } = decoded as { id: string };
+
+    const user = await User.findById(id).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({
+      isAuthenticated: true,
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return res.status(401).json({ isAuthenticated: false });
+  }
+};

@@ -1,33 +1,39 @@
+import { setAuth } from "@/store/slices/Auth-Slice";
 import { Box, Text } from "@radix-ui/themes";
 import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FaEnvelope, FaUserLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom"; // 👈 Make sure you're using react-router-dom's useNavigate
 import { Button } from "./ui/button";
 
 const SignInForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onSubmit = async (data: any) => {
-        try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signin`, data);
-        console.log(data);
-        toast.success("Sign in successful!", {
-            position: "top-center",
-        });
-        reset(); // reset form as new afte subbmited
-        setTimeout(() => {
-          navigate("/");
-        }, 2000)
-        } catch (error) {
-        const err = error as AxiosError<{ message?: string }>;
-        const message = err.response?.data?.message || "Error signing in";
-        console.error(error);
-        toast.error(message);
-        }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = async (data: any) => {
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signin`, data);
+
+      const { user } = res.data;
+      dispatch(setAuth(user));
+      
+      toast.success("Sign in successful!", {
+        position: "top-center",
+      });
+      reset();
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      const message = err.response?.data?.message || "Error signing in";
+      console.error(error);
+      toast.error(message);
+    }
   };
 
   return (
@@ -44,34 +50,39 @@ const SignInForm = () => {
         <div className="w-2/3 space-y-2 mx-auto text-end">
           <Box className="space-y-4">
             <Box className="relative">
-                <FaEnvelope className="absolute left-3 top-[18px] text-gray-400" />
-                <input
+              <FaEnvelope className="absolute left-3 top-[18px] text-gray-400" />
+              <input
                 {...register("email")}
                 type="email"
                 placeholder="Email address"
                 className="w-full pl-10 md:pl-10 p-4 md:p-3 text-sm md:text-base border rounded-lg"
                 required
-                />
+              />
             </Box>
 
             <Box className="relative">
-                <FaUserLock className="absolute left-3 top-[18px] text-gray-400" />
-                <input
+              <FaUserLock className="absolute left-3 top-[18px] text-gray-400" />
+              <input
                 {...register("password")}
                 type="password"
                 placeholder="Password"
                 className="w-full pl-10 md:pl-10 p-4 md:p-3 text-sm md:text-base border rounded-lg"
                 required
-                />
+              />
             </Box>
           </Box>
-          <Link to="/restorePassword" className="text-sm font-medium hover:font-semibold underline text-blue-600">
-            Don't have an account?
+
+          {/* ✅ Fix: Change link to /signup instead of /restorePassword */}
+          <Link
+            to="/signup"
+            className="text-sm font-medium hover:font-semibold underline text-blue-600"
+          >
+            Don't have an account? Sign Up
           </Link>
 
           <Button
-          type="submit"
-          className="text-base p-6 mt-4 rounded-lg w-full cursor-pointer bg-[#e3462c] hover:bg-[#e32c2c] text-white"
+            type="submit"
+            className="text-base p-6 mt-4 rounded-lg w-full cursor-pointer bg-[#e3462c] hover:bg-[#e32c2c] text-white"
           >
             Sign In
           </Button>
@@ -79,6 +90,6 @@ const SignInForm = () => {
       </form>
     </div>
   );
-}
+};
 
-export default SignInForm
+export default SignInForm;

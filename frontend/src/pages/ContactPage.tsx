@@ -7,13 +7,13 @@ const ContactPage = () => {
   return (
     <Box>
       <Toaster />
-      <div className="flex py-10 justify-center items-center bg-[#1F272B]">
+      <div className="flex py-10 justify-center items-center bg-[#D3FAFF]">
         {/* Image */}
         <Box>
           <img
             src={contactImage}
             alt="cute cat and dog sitting on a chair"
-            className="hidden lg:block w-[433px] mx-auto md:mx-0"
+            className="hidden lg:block w-[433px] shadow-lg mx-auto md:mx-0"
           />
         </Box>
 

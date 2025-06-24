@@ -15,7 +15,7 @@ const Phone: React.FC<PhoneSVGProps> = ({ title, link }) => {
       <div className="w-7 h-7 bg-[#FFD044] rounded-full flex items-center justify-center">
         <img src={phoneIcon} alt="phone icon" />
       </div>
-      <p className="text-sm md:text-base underline text-[#FFD044]">{title}</p>
+      <p className="text-sm lg:text-base underline text-[#FFD044]">{title}</p>
     </Link>
   );
 };

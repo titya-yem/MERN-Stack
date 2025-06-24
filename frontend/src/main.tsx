@@ -21,6 +21,7 @@ import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
 
 // Pages
 import axios from "axios";
+import AuthWrapper from "./components/AuthWrapper.tsx";
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -38,42 +39,44 @@ createRoot(document.getElementById("root")!).render(
       <Theme appearance="inherit">
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <Navbar />
-            <Routes>
-              {/* Home Page */}
-              <Route path="/" element={<RootLayout />}>
-                <Route index element={<HomePage />} />
-              </Route>
+            <AuthWrapper>
+              <Navbar />
+              <Routes>
+                {/* Home Page */}
+                <Route path="/" element={<RootLayout />}>
+                  <Route index element={<HomePage />} />
+                </Route>
 
-              {/* Appointment Page */}
-              <Route path="/appointment" element={<AppointmentPage />} />
+                {/* Appointment Page */}
+                <Route path="/appointment" element={<AppointmentPage />} />
 
-              {/* Shop Pages */}
-              <Route path="/shop" element={<ShopLayout />}>
-                <Route index element={<ShopPage />} />
-              </Route>
-              <Route path="/shop/:slug" element={<ShopDetailLayout />}>
-                <Route index element={<ProductDetailPage />} />
-              </Route>
+                {/* Shop Pages */}
+                <Route path="/shop" element={<ShopLayout />}>
+                  <Route index element={<ShopPage />} />
+                </Route>
+                <Route path="/shop/:slug" element={<ShopDetailLayout />}>
+                  <Route index element={<ProductDetailPage />} />
+                </Route>
 
-              {/* Services Page */}
-              <Route path="/services" element={<ServicesLayout />}>
-                <Route index element={<ServicesPage />} />
-              </Route>
+                {/* Services Page */}
+                <Route path="/services" element={<ServicesLayout />}>
+                  <Route index element={<ServicesPage />} />
+                </Route>
 
-              {/* Contact Page */}
-              <Route path="/contact" element={<ContactPage />} />
+                {/* Contact Page */}
+                <Route path="/contact" element={<ContactPage />} />
 
-              {/* SignIn Page */}
-              <Route path="/signin" element={<SignInPage />} />
+                {/* SignIn Page */}
+                <Route path="/signin" element={<SignInPage />} />
 
-              {/* SignUp Page */}
-              <Route path="/signup" element={<SignUpPage />} />
+                {/* SignUp Page */}
+                <Route path="/signup" element={<SignUpPage />} />
 
-              {/* Cart Page */}
-              <Route path="/cart" element={<Cart />} />
-            </Routes>
-            <Footer />
+                {/* Cart Page */}
+                <Route path="/cart" element={<Cart />} />
+              </Routes>
+              <Footer />
+            </AuthWrapper> 
           </BrowserRouter>
         </QueryClientProvider>
       </Theme>

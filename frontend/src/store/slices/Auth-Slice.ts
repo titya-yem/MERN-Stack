@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -26,10 +27,9 @@ export const fetchAuthStatus = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get("/api/auth/me", {
-        withCredentials: true,
+        withCredentials: true, // ensures cookie is sent
       });
       return response.data;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.response?.data || {});
     }

@@ -16,24 +16,40 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { logout } from "@/store/slices/Auth-Slice";
 import type { RootState } from "@/store/store";
 import { Box, Container, Flex } from "@radix-ui/themes";
+import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLists } from "../../constants/Navbar";
 
 const Navbar: React.FC = () => {
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
-  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
   const closeSheet = () => setIsSheetOpen(false);
 
-  const location = useLocation();
-  const desktopNavbarLists = NavbarLists.filter((item) => item.label !== "Cart");
+  const handleSignOut = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signout`, { withCredentials: true });
+      dispatch(logout());
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
-  // Split into main nav and dropdown nav
-  const mainNavItems = desktopNavbarLists.slice(0, 3); // Home, Shop, Services
-  const dropdownItems = desktopNavbarLists.slice(3); // Appointment, Contact, Sign Up
+  const mainNavItems = NavbarLists.slice(0, 3); // Home, Shop, Services
+  const extraNavItems = NavbarLists.filter((item) =>
+    ["Appointment", "Contact"].includes(item.label)
+  );
+  const authItems = NavbarLists.filter((item) =>
+    ["Sign In", "Sign Up"].includes(item.label)
+  );
 
   return (
     <Container className="bg-[#e3462c]">
@@ -45,11 +61,12 @@ const Navbar: React.FC = () => {
         </Box>
 
         <Flex gap="5" align="center">
+          {/* Desktop Nav */}
           {mainNavItems.map((item) => (
             <Link
               key={item.link}
               to={item.link}
-              className={`hidden md:block text-white hover:font-medium duration-200 ${
+              className={`hidden lg:block text-white hover:font-medium duration-200 ${
                 location.pathname === item.link
                   ? "underline underline-offset-4 font-medium"
                   : ""
@@ -59,8 +76,8 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
 
-          {/* Dropdown Menu (Appointment, Contact, Sign Up) */}
-          <NavigationMenu>
+          {/* Desktop Dropdown Menu */}
+          <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="cursor-pointer text-[15px] text-white bg-[#e3462c]">
@@ -68,13 +85,10 @@ const Navbar: React.FC = () => {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[240px] gap-2 p-4 shadow-md rounded-md">
-                    {dropdownItems.map((item) => (
+                    {extraNavItems.map((item) => (
                       <li key={item.link}>
                         <NavigationMenuLink asChild>
-                          <Link
-                            to={item.link}
-                            className="block p-2 rounded-md"
-                          >
+                          <Link to={item.link} className="block p-2 rounded-md">
                             <div className="font-medium">{item.label}</div>
                             {item.description && (
                               <div className="text-sm text-muted-foreground">
@@ -85,13 +99,35 @@ const Navbar: React.FC = () => {
                         </NavigationMenuLink>
                       </li>
                     ))}
+
+                    <li className="border-t pt-2 mt-2">
+                      {!isAuthenticated ? (
+                        authItems.map((item) => (
+                          <NavigationMenuLink asChild key={item.link}>
+                            <Link
+                              to={item.link}
+                              className="block p-2 my-2 rounded-md text-[15px] text-center font-medium text-white hover:text-white bg-red-500 hover:bg-red-600"
+                            >
+                              {item.label}
+                            </Link>
+                          </NavigationMenuLink>
+                        ))
+                      ) : (
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full p-2 rounded-md cursor-pointer text-white bg-red-500 hover:bg-red-600"
+                        >
+                          Sign Out
+                        </button>
+                      )}
+                    </li>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Cart Icon */}
+          {/* Cart */}
           <Link to="/cart" className="relative">
             <img
               src={ShoppingBag}
@@ -106,14 +142,14 @@ const Navbar: React.FC = () => {
             )}
           </Link>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu */}
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger>
               <img
                 src={toggle}
                 alt="toggle"
                 width={25}
-                className="md:hidden invert focus:outline-none"
+                className="lg:hidden invert focus:outline-none"
               />
             </SheetTrigger>
             <SheetContent className="w-3/4 sm:w-1/2">
@@ -122,19 +158,49 @@ const Navbar: React.FC = () => {
                   Pet Shop
                 </SheetTitle>
                 <Box className="text-center space-y-4">
-                  {NavbarLists.map((item) => (
+                  {NavbarLists.filter((item) => {
+                    if (item.label === "Cart") return true;
+                    if (["Sign In", "Sign Up"].includes(item.label)) return false;
+                    if (isAuthenticated && ["Sign In", "Sign Up"].includes(item.label)) return false;
+                    return true;
+                  }).map((item) => (
                     <div
                       key={item.link}
+                      onClick={closeSheet}
                       className={`hover:font-medium duration-200 hover:bg-[#e3462c] rounded-lg p-2 hover:text-white ${
                         location.pathname === item.link
                           ? "underline underline-offset-4 font-medium"
                           : ""
                       }`}
-                      onClick={closeSheet}
                     >
                       <Link to={item.link}>{item.label}</Link>
                     </div>
                   ))}
+
+                  <div className="border-t pt-4 mt-4">
+                    {!isAuthenticated ? (
+                      authItems.map((item) => (
+                        <div key={item.link} onClick={closeSheet}>
+                          <Link
+                            to={item.link}
+                            className="block py-2 rounded-md text-[#e3462c] font-semibold hover:bg-[#e3462c] hover:text-white"
+                          >
+                            {item.label}
+                          </Link>
+                        </div>
+                      ))
+                    ) : (
+                      <button
+                        onClick={() => {
+                          handleSignOut();
+                          closeSheet();
+                        }}
+                        className="w-full py-2 mt-2 rounded-lg text-white bg-red-500 hover:bg-red-600 cursor-pointer transition"
+                      >
+                        Sign Out
+                      </button>
+                    )}
+                  </div>
                 </Box>
               </SheetHeader>
             </SheetContent>
