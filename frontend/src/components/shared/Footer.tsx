@@ -4,7 +4,7 @@ import emailIcon from "@/assets/svg/Email.svg";
 import phoneIcon from "@/assets/svg/footer-phone.svg";
 import line from "@/assets/svg/Line.svg";
 import { NavbarLists } from "@/constants/Navbar";
-import { Box, Container, Text } from "@radix-ui/themes";
+import { Box, Container, Flex, Text } from "@radix-ui/themes";
 import { Link } from "react-router";
 
 const Footer: React.FC = () => {
@@ -34,19 +34,30 @@ const Footer: React.FC = () => {
         </Box>
 
         {/* Middle side */}
-        <Box className="text-center mt-6">
+        <Box className="text-center mt-6 mb-4">
           <h1 className="mb-3 text-xl md:text-2xl lg:text-3xl font-semibold">
             Menu
           </h1>
-          <Box>
-            {NavbarLists.map((list) => (
-              <ul key={list.link}>
-                <li className="underline underline-offset-4 pb-3 hover:font-medium duration-200">
-                  <Link to={list.link}>{list.label}</Link>
-                </li>
-              </ul>
-            ))}
-          </Box>
+          <Flex gapX="4">
+            <Box>
+              {NavbarLists.slice(0,4).map((list) => (
+                <ul key={list.link}>
+                  <li className="underline underline-offset-4 pb-3 hover:font-medium duration-200">
+                    <Link to={list.link}>{list.label}</Link>
+                  </li>
+                </ul>
+              ))}
+            </Box>
+            <Box>  
+              {NavbarLists.slice(4,8).map((list) => (
+                <ul key={list.link}>
+                  <li className="underline underline-offset-4 pb-3 hover:font-medium duration-200">
+                    <Link to={list.link}>{list.label}</Link>
+                  </li>
+                </ul>
+              ))}
+            </Box>
+          </Flex>
         </Box>
 
         {/* Right side */}
@@ -54,7 +65,7 @@ const Footer: React.FC = () => {
           <h1 className="mb-3 text-xl md:text-2xl lg:text-3xl font-semibold">
             Contact Us
           </h1>
-          <Box className="xl:mt-14 space-y-2">
+          <Box className="mt-4 space-y-2">
             <div className="flex items-center justify-center gap-x-4">
               <img src={addressIcon} alt="Our Location" />
               <Text as="p" className="w-[62%] md:w-1/2 text-left">
