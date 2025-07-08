@@ -1,10 +1,10 @@
-import AppointmentImage from "@/assets/svg/DashBoard/appointment.svg"
-import CommentImage from "@/assets/svg/DashBoard/comments.svg"
-import ContactImage from "@/assets/svg/DashBoard/contact.svg"
-import OrderImage from "@/assets/svg/DashBoard/orders.svg"
-import ProductImage from "@/assets/svg/DashBoard/product.svg"
-import ServiceImage from "@/assets/svg/DashBoard/service.svg"
-import UserImage from "@/assets/svg/DashBoard/user.svg"
+import AppointmentImage from "@/assets/svg/dashboard/appointment.svg"
+import CommentImage from "@/assets/svg/dashboard/comment.svg"
+import ContactImage from "@/assets/svg/dashboard/contact.svg"
+import OrderImage from "@/assets/svg/dashboard/orders.svg"
+import ProductImage from "@/assets/svg/dashboard/product.svg"
+import ServiceImage from "@/assets/svg/dashboard/service.svg"
+import UserImage from "@/assets/svg/dashboard/user.svg"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type SideBarItem = {
