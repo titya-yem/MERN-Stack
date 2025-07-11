@@ -80,13 +80,13 @@ createRoot(document.getElementById("root")!).render(
                 {/* Dashboard Page for admin */}
                 <Route path="/dashboard" element={<AdminWrapper><DashboardLayout /></AdminWrapper>}>
                   <Route index element={<DashboardPage />} />
-                  <Route path="/dashboard/orders" element={<OrdersPage />} />
-                  <Route path="/dashboard/products" element={<ProductsPage />} />
-                  <Route path="/dashboard/appointments" element={<AppointmentsPage />} />
-                  <Route path="/dashboard/services" element={<ServicesPage />} />
-                  <Route path="/dashboard/users" element={<UsersPage />} />
-                  <Route path="/dashboard/comments" element={<CommentsPage />} />
-                  <Route path="/dashboard/contacts" element={<ContactsPage />} />
+                  <Route path="orders" element={<OrdersPage />} />
+                  <Route path="products" element={<ProductsPage />} />
+                  <Route path="appointments" element={<AppointmentsPage />} />
+                  <Route path="services" element={<ServicesPage />} />
+                  <Route path="users" element={<UsersPage />} />
+                  <Route path="comments" element={<CommentsPage />} />
+                  <Route path="contacts" element={<ContactsPage />} />
                 </Route>
 
                 {/* Dashboard Page for user */}
