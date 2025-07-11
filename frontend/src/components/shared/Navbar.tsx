@@ -44,9 +44,12 @@ const Navbar: React.FC = () => {
   };
 
   const mainNavItems = NavbarLists.slice(0, 3); // Home, Shop, Services
-  const extraNavItems = NavbarLists.filter((item) =>
-    ["Appointment", "Contact", "Dashboard"].includes(item.label)
-  );
+  const extraNavItems = NavbarLists.filter((item) => {
+    if (item.label === "Dashboard") {
+      return isAuthenticated; 
+    }
+    return ["Appointment", "Contact"].includes(item.label)
+  });
   const authItems = NavbarLists.filter((item) =>
     ["Sign In", "Sign Up"].includes(item.label)
   );

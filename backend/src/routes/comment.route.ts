@@ -5,12 +5,13 @@ import {
     getAllComments,
     updateComment,
 } from "../controllers/comment.controller";
+import auth from "../middlewares/auth.middleware";
 
 const router = Router();
 
 router.get("/", getAllComments)
-router.post("/create", createComment)
-router.put("/:id", updateComment)
-router.delete("/:id", deleteComment)
+router.post("/create", auth, createComment)
+router.put("/:id", auth, updateComment)
+router.delete("/:id", auth, deleteComment)
 
 export default router;

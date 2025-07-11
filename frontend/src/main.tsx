@@ -10,7 +10,7 @@ import "./index.css";
 import { store } from "./store/store.ts";
 
 // Components
-import AuthWrapper from "./components/AuthWrapper.tsx";
+import AuthWrapper from "./auth/AuthWrapper.tsx";
 import Cart from "./components/Cart.tsx";
 import ProductDetailPage from "./components/ProductDetails.tsx";
 import Footer from "./components/shared/Footer.tsx";
@@ -24,6 +24,7 @@ import ShopLayout from "./layouts/ShopLayout.tsx";
 import ShopDetailLayout from "./layouts/ShopLayoutById.tsx";
 
 // Pages
+import AdminWrapper from "./auth/AdminWrapper.tsx";
 import AppointmentPage from "./pages/AppointmentPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import AppointmentsPage from "./pages/Dashboard/appointment.tsx";
@@ -76,8 +77,8 @@ createRoot(document.getElementById("root")!).render(
                 {/* Contact Page */}
                 <Route path="/contact" element={<ContactPage />} />
 
-                {/* Dashboard Page */}
-                <Route path="/dashboard" element={<DashboardLayout />}>
+                {/* Dashboard Page for admin */}
+                <Route path="/dashboard" element={<AdminWrapper><DashboardLayout /></AdminWrapper>}>
                   <Route index element={<DashboardPage />} />
                   <Route path="/dashboard/orders" element={<OrdersPage />} />
                   <Route path="/dashboard/products" element={<ProductsPage />} />
@@ -87,6 +88,8 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/dashboard/comments" element={<CommentsPage />} />
                   <Route path="/dashboard/contacts" element={<ContactsPage />} />
                 </Route>
+
+                {/* Dashboard Page for user */}
 
                 {/* SignIn Page */}
                 <Route path="/signin" element={<SignInPage />} />

@@ -4,7 +4,7 @@ import { JwtPayload, verify } from 'jsonwebtoken';
 
 dotenv.config();
 
-interface AuthRequest extends Request {
+export interface AuthRequest extends Request {
   user?: {
     id: string;
     email: string;
@@ -12,11 +12,12 @@ interface AuthRequest extends Request {
   };
 }
 
-const auth = (req: AuthRequest, res: Response, next: NextFunction): Response | void => {
+const auth = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
   const { token } = req.cookies;
 
   if (!token) {
-    return res.status(401).json({ success: false, message: "Access denied. Unauthorized" });
+    res.status(401).json({ success: false, message: "Access denied. Unauthorized" });
+    return;
   }
 
   try {
@@ -31,7 +32,7 @@ const auth = (req: AuthRequest, res: Response, next: NextFunction): Response | v
     next();
   } catch (error) {
     console.error("JWT verification error:", error instanceof Error ? error.message : error);
-    return res.status(401).json({ success: false, message: "Invalid token" });
+    res.status(401).json({ success: false, message: "Invalid token" });
   }
 };
 
